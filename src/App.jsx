@@ -4,6 +4,7 @@ import ServiceBlueprint from './components/ServiceBlueprint'
 import ApplicationLandscape from './components/ApplicationLandscape'
 import KnowledgeDomainView from './components/KnowledgeDomainView'
 import IntegrationMap from './components/IntegrationMap'
+import HelpGuide from './components/HelpGuide'
 import DetailPanel from './components/DetailPanel'
 import { calculateAllRisks } from './utils/riskCalculation'
 import { buildIndex, buildRoleIndex } from './utils/dataHelpers'
@@ -45,7 +46,8 @@ export default function App() {
         blueprint: 'blueprint',
         applications: 'applications',
         domains: 'domains',
-        integrations: 'integrations'
+        integrations: 'integrations',
+        guide: 'guide'
       }
       setCurrentView(viewMap[hash] || 'blueprint')
       setSelectedItem(null) // Clear detail panel on navigation
@@ -94,6 +96,8 @@ export default function App() {
             entities={entities}
           />
         )
+      case 'guide':
+        return <HelpGuide />
       case 'blueprint':
       default:
         return (

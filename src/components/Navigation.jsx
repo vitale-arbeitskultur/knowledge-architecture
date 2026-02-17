@@ -5,7 +5,8 @@ export default function Navigation({ currentView }) {
     { id: 'blueprint', label: 'Blueprint', hash: '#blueprint' },
     { id: 'applications', label: 'Applications', hash: '#applications' },
     { id: 'domains', label: 'Domains', hash: '#domains' },
-    { id: 'integrations', label: 'Integrations', hash: '#integrations' }
+    { id: 'integrations', label: 'Integrations', hash: '#integrations' },
+    { id: 'guide', label: 'Guide', hash: '#guide' }
   ]
 
   return (
