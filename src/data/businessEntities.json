@@ -1,0 +1,762 @@
+[
+  {
+    "id": "be-lead",
+    "name": "Lead",
+    "description": "Potential customer showing initial interest in equipment rental services",
+    "knowledgeDomainId": "kd-client-mgmt",
+    "attributes": [
+      {
+        "name": "Company Name",
+        "type": "string",
+        "description": "Legal company name of the potential customer",
+        "validationRules": "Required. Max 200 characters. No duplicates among active leads.",
+        "retentionPolicy": "12 months after last activity if not converted to customer",
+        "archivingRules": "Anonymize company name and move to sales analytics archive after retention period"
+      },
+      {
+        "name": "Contact Person",
+        "type": "string",
+        "description": "Name of primary contact at the lead organization",
+        "validationRules": "Required. First and last name format. Max 100 characters.",
+        "retentionPolicy": "Deleted when lead record is archived",
+        "archivingRules": "Fully anonymized before archival"
+      },
+      {
+        "name": "Contact Email",
+        "type": "email",
+        "description": "Primary email address of the contact person",
+        "validationRules": "Required. Valid email format. Unique across active leads.",
+        "retentionPolicy": "Deleted when lead record is archived",
+        "archivingRules": "Fully removed, not archived, to comply with GDPR"
+      },
+      {
+        "name": "Source",
+        "type": "enum",
+        "description": "How the lead was acquired",
+        "validationRules": "Required. One of: Website, Referral, Event, Cold Outreach, Partner.",
+        "retentionPolicy": "Retained with lead record for attribution analysis",
+        "archivingRules": "Retained in anonymized form for sales channel analytics"
+      },
+      {
+        "name": "Equipment Interest",
+        "type": "string",
+        "description": "Type of IT equipment the lead is interested in renting",
+        "validationRules": "Optional. Free text. Max 500 characters.",
+        "retentionPolicy": "Retained during active lead period",
+        "archivingRules": "Anonymized for product demand trending"
+      },
+      {
+        "name": "Estimated Fleet Size",
+        "type": "integer",
+        "description": "Estimated number of devices the lead may need to rent",
+        "validationRules": "Optional. Positive integer between 1 and 10000.",
+        "retentionPolicy": "Retained during active lead period",
+        "archivingRules": "Retained for market analysis and capacity planning"
+      }
+    ]
+  },
+  {
+    "id": "be-customer",
+    "name": "Customer",
+    "description": "Active or former customer with one or more signed rental contracts",
+    "knowledgeDomainId": "kd-client-mgmt",
+    "attributes": [
+      {
+        "name": "Company Name",
+        "type": "string",
+        "description": "Legal company name of the customer",
+        "validationRules": "Required. Max 200 characters. Must match official trade register.",
+        "retentionPolicy": "Active customer record plus 10 years after final contract termination",
+        "archivingRules": "Archive to compliance storage for audit and legal retention requirements"
+      },
+      {
+        "name": "Customer ID",
+        "type": "string",
+        "description": "Unique auto-generated customer identifier",
+        "validationRules": "Auto-generated. Format: CUS-YYYYMMDD-NNN. Unique and immutable.",
+        "retentionPolicy": "Permanent reference key while customer record exists",
+        "archivingRules": "Retained as primary key in all archives for referential integrity"
+      },
+      {
+        "name": "Industry",
+        "type": "enum",
+        "description": "Industry classification of the customer organization",
+        "validationRules": "Required. Enumerated values: Banking, Insurance, Retail, Healthcare, Manufacturing, Government, Education, Technology, Consulting, Other.",
+        "retentionPolicy": "Retained with customer record for reporting and segmentation",
+        "archivingRules": "Retained for industry-based analytics and trend analysis"
+      },
+      {
+        "name": "Account Manager",
+        "type": "reference",
+        "description": "Employee assigned as primary account manager for this customer",
+        "validationRules": "Required. Must reference active employee in be-employee. Updated when responsibility changes.",
+        "retentionPolicy": "Updated with each reassignment; history maintained in audit log",
+        "archivingRules": "Last assigned account manager retained in archive"
+      },
+      {
+        "name": "Credit Rating",
+        "type": "enum",
+        "description": "Internal credit assessment of customer payment reliability",
+        "validationRules": "Required. One of: A (Excellent), B (Good), C (Fair). Reassessed annually.",
+        "retentionPolicy": "Retained with customer record; updated on annual review or major payment events",
+        "archivingRules": "Final credit rating retained for financial risk analysis"
+      },
+      {
+        "name": "Payment Terms",
+        "type": "enum",
+        "description": "Standard payment terms for customer invoices",
+        "validationRules": "Required. One of: 14d (14 days), 30d (30 days), 60d (60 days).",
+        "retentionPolicy": "Retained with customer record; updated when terms negotiated",
+        "archivingRules": "Final terms retained for financial analysis"
+      }
+    ]
+  },
+  {
+    "id": "be-device",
+    "name": "Device",
+    "description": "Individual piece of IT equipment managed for rental to customers",
+    "knowledgeDomainId": "kd-asset-mgmt",
+    "attributes": [
+      {
+        "name": "Serial Number",
+        "type": "string",
+        "description": "Manufacturer's unique serial number of the device",
+        "validationRules": "Required. Unique across all devices. Max 50 characters. Immutable once created.",
+        "retentionPolicy": "Permanent while device is in inventory; retained 7 years after retirement",
+        "archivingRules": "Archived with device history for audit trail and warranty tracking"
+      },
+      {
+        "name": "Device Type",
+        "type": "enum",
+        "description": "Category of IT equipment",
+        "validationRules": "Required. One of: Notebook, Phone, Monitor, Accessory.",
+        "retentionPolicy": "Retained with device record",
+        "archivingRules": "Retained for asset type analytics and depreciation tracking"
+      },
+      {
+        "name": "Manufacturer",
+        "type": "string",
+        "description": "Original equipment manufacturer name",
+        "validationRules": "Required. Max 100 characters. Standardized list of known manufacturers.",
+        "retentionPolicy": "Retained with device record",
+        "archivingRules": "Retained for warranty and support tracking"
+      },
+      {
+        "name": "Model",
+        "type": "string",
+        "description": "Device model identifier from manufacturer",
+        "validationRules": "Required. Max 100 characters. Paired with manufacturer for uniqueness.",
+        "retentionPolicy": "Retained with device record",
+        "archivingRules": "Retained for technical specification and replacement part tracking"
+      },
+      {
+        "name": "Purchase Date",
+        "type": "date",
+        "description": "Date the device was purchased or acquired",
+        "validationRules": "Required. Format: YYYY-MM-DD. Must be on or before current date.",
+        "retentionPolicy": "Retained with device record",
+        "archivingRules": "Retained for depreciation and warranty expiry calculations"
+      },
+      {
+        "name": "Condition",
+        "type": "enum",
+        "description": "Current physical and functional condition of the device",
+        "validationRules": "Required. One of: New, Good, Fair, Repair, Retired.",
+        "retentionPolicy": "Updated with each maintenance event or inspection",
+        "archivingRules": "Final condition retained for asset disposal documentation"
+      },
+      {
+        "name": "Current Location",
+        "type": "enum",
+        "description": "Where the device is currently located or deployed",
+        "validationRules": "Required. One of: Warehouse, Customer, Transit, Maintenance.",
+        "retentionPolicy": "Updated in real-time with device movements",
+        "archivingRules": "Last known location retained for asset recovery procedures"
+      },
+      {
+        "name": "Assigned Customer ID",
+        "type": "reference",
+        "description": "Reference to customer currently renting this device, if applicable",
+        "validationRules": "Optional. Must reference existing be-customer if populated. Null when not assigned.",
+        "retentionPolicy": "Updated when assignment changes; history in rental orders",
+        "archivingRules": "Customer assignment history retained for billing reconciliation"
+      }
+    ]
+  },
+  {
+    "id": "be-product",
+    "name": "Product",
+    "description": "Catalog entry for a type of IT equipment available for rental",
+    "knowledgeDomainId": "kd-asset-mgmt",
+    "attributes": [
+      {
+        "name": "Product Name",
+        "type": "string",
+        "description": "Commercial name of the product offering",
+        "validationRules": "Required. Max 150 characters. Unique within product category.",
+        "retentionPolicy": "Retained while product is offered; 3 years after discontinuation",
+        "archivingRules": "Archived with pricing and specification history for revenue analysis"
+      },
+      {
+        "name": "Category",
+        "type": "enum",
+        "description": "Product category for organizational purposes",
+        "validationRules": "Required. One of: Notebook, Phone, Monitor, Accessory.",
+        "retentionPolicy": "Retained with product record",
+        "archivingRules": "Retained for portfolio analysis and market positioning"
+      },
+      {
+        "name": "Manufacturer",
+        "type": "string",
+        "description": "Equipment manufacturer name",
+        "validationRules": "Required. Max 100 characters.",
+        "retentionPolicy": "Retained with product record",
+        "archivingRules": "Retained for vendor relationship and quality metrics"
+      },
+      {
+        "name": "Monthly Rental Price",
+        "type": "currency",
+        "description": "Standard monthly rental price in EUR",
+        "validationRules": "Required. Currency: EUR. Positive value. Two decimal places.",
+        "retentionPolicy": "Current price retained; historical prices maintained in audit log",
+        "archivingRules": "Price history retained for revenue trend analysis"
+      },
+      {
+        "name": "Specifications",
+        "type": "string",
+        "description": "Technical specifications and key features of the product",
+        "validationRules": "Optional. Free text. Max 2000 characters.",
+        "retentionPolicy": "Retained while product is offered",
+        "archivingRules": "Specifications history archived for obsolescence tracking"
+      },
+      {
+        "name": "Availability Count",
+        "type": "integer",
+        "description": "Total number of units currently available for rental",
+        "validationRules": "Required. Non-negative integer. Real-time count of unassigned devices.",
+        "retentionPolicy": "Updated in real-time with rental and return transactions",
+        "archivingRules": "Daily snapshots retained for capacity planning analysis"
+      }
+    ]
+  },
+  {
+    "id": "be-rental-order",
+    "name": "Rental Order",
+    "description": "Customer order for rental of one or more IT devices",
+    "knowledgeDomainId": "kd-order-mgmt",
+    "attributes": [
+      {
+        "name": "Order ID",
+        "type": "string",
+        "description": "Unique order identifier auto-generated at creation",
+        "validationRules": "Auto-generated. Format: ORD-YYYY-NNNNN. Unique and immutable.",
+        "retentionPolicy": "Permanent with customer financial history for 10 years",
+        "archivingRules": "Retained in compliance archive for audit and financial reconciliation"
+      },
+      {
+        "name": "Customer ID",
+        "type": "reference",
+        "description": "Reference to the customer placing this order",
+        "validationRules": "Required. Must reference existing be-customer record.",
+        "retentionPolicy": "Retained with order record",
+        "archivingRules": "Retained to maintain customer-order relationship integrity"
+      },
+      {
+        "name": "Order Date",
+        "type": "date",
+        "description": "Date the order was placed",
+        "validationRules": "Required. Format: YYYY-MM-DD. Automatically set to current date.",
+        "retentionPolicy": "Retained with order record",
+        "archivingRules": "Retained for order history and timeline analysis"
+      },
+      {
+        "name": "Requested Delivery Date",
+        "type": "date",
+        "description": "Date the customer requests delivery of rental equipment",
+        "validationRules": "Required. Format: YYYY-MM-DD. Must be after order date.",
+        "retentionPolicy": "Retained with order record",
+        "archivingRules": "Retained for delivery performance metrics"
+      },
+      {
+        "name": "Status",
+        "type": "enum",
+        "description": "Current state of the order fulfillment lifecycle",
+        "validationRules": "Required. One of: Draft, Confirmed, In Fulfillment, Shipped, Delivered, Cancelled.",
+        "retentionPolicy": "Updated in real-time; final status retained with order",
+        "archivingRules": "Order lifecycle retained for operations metrics"
+      },
+      {
+        "name": "Total Monthly Value",
+        "type": "currency",
+        "description": "Sum of monthly rental fees for all devices in this order in EUR",
+        "validationRules": "Required. Currency: EUR. Calculated from ordered products. Non-negative.",
+        "retentionPolicy": "Retained with order record",
+        "archivingRules": "Retained for revenue reporting and customer lifetime value calculation"
+      }
+    ]
+  },
+  {
+    "id": "be-rental-contract",
+    "name": "Rental Contract",
+    "description": "Legally binding rental agreement between company and customer",
+    "knowledgeDomainId": "kd-contract-mgmt",
+    "attributes": [
+      {
+        "name": "Contract Number",
+        "type": "string",
+        "description": "Unique contract identifier auto-generated at creation",
+        "validationRules": "Auto-generated. Format: RC-YYYY-NNN. Unique and immutable.",
+        "retentionPolicy": "Permanent. Retained 10 years after contract termination for legal compliance",
+        "archivingRules": "Full contract document archived in secure compliance storage"
+      },
+      {
+        "name": "Customer ID",
+        "type": "reference",
+        "description": "Reference to the customer bound by this contract",
+        "validationRules": "Required. Must reference existing be-customer record.",
+        "retentionPolicy": "Retained with contract record",
+        "archivingRules": "Retained to maintain contract-customer relationship"
+      },
+      {
+        "name": "Start Date",
+        "type": "date",
+        "description": "Date the contract becomes effective",
+        "validationRules": "Required. Format: YYYY-MM-DD. Cannot be in the past at creation.",
+        "retentionPolicy": "Retained with contract record",
+        "archivingRules": "Retained for contract lifecycle reporting"
+      },
+      {
+        "name": "End Date",
+        "type": "date",
+        "description": "Date the contract expires or is terminated",
+        "validationRules": "Required. Format: YYYY-MM-DD. Must be after start date.",
+        "retentionPolicy": "Retained with contract record",
+        "archivingRules": "Retained for contract duration analysis and renewal planning"
+      },
+      {
+        "name": "Monthly Fee",
+        "type": "currency",
+        "description": "Total monthly recurring fee in EUR under this contract",
+        "validationRules": "Required. Currency: EUR. Positive value. Two decimal places.",
+        "retentionPolicy": "Retained with contract record; changes logged in amendment history",
+        "archivingRules": "Fee history retained for revenue trend analysis"
+      },
+      {
+        "name": "Payment Terms",
+        "type": "enum",
+        "description": "Standard payment terms for invoices under this contract",
+        "validationRules": "Required. One of: 14d (14 days), 30d (30 days), 60d (60 days).",
+        "retentionPolicy": "Retained with contract record",
+        "archivingRules": "Retained for cash flow and DSO analysis"
+      },
+      {
+        "name": "Auto-Renewal",
+        "type": "boolean",
+        "description": "Whether contract automatically renews at end date",
+        "validationRules": "Required. Boolean: true or false.",
+        "retentionPolicy": "Retained with contract record",
+        "archivingRules": "Retained for renewal management and customer lifecycle analysis"
+      },
+      {
+        "name": "SLA Tier",
+        "type": "enum",
+        "description": "Service level agreement tier for this contract",
+        "validationRules": "Required. One of: Basic, Standard, Premium.",
+        "retentionPolicy": "Retained with contract record; changes tracked in amendments",
+        "archivingRules": "Retained for support quality metrics and service level compliance"
+      }
+    ]
+  },
+  {
+    "id": "be-invoice",
+    "name": "Invoice",
+    "description": "Billing document issued to customer for rental services",
+    "knowledgeDomainId": "kd-finance",
+    "attributes": [
+      {
+        "name": "Invoice Number",
+        "type": "string",
+        "description": "Unique invoice identifier auto-generated at creation",
+        "validationRules": "Auto-generated. Format: INV-YYYYMM-NNNN. Unique and immutable.",
+        "retentionPolicy": "Permanent. Retained 10 years for tax and accounting compliance",
+        "archivingRules": "Archived in finance system with full audit trail for tax authority requirements"
+      },
+      {
+        "name": "Contract ID",
+        "type": "reference",
+        "description": "Reference to the rental contract this invoice is billed under",
+        "validationRules": "Required. Must reference existing be-rental-contract.",
+        "retentionPolicy": "Retained with invoice for contract linkage",
+        "archivingRules": "Retained to maintain invoice-contract traceability"
+      },
+      {
+        "name": "Billing Period",
+        "type": "string",
+        "description": "Month/period for which this invoice is issued",
+        "validationRules": "Required. Format: YYYY-MM.",
+        "retentionPolicy": "Retained with invoice record",
+        "archivingRules": "Retained for period-based financial reporting"
+      },
+      {
+        "name": "Amount",
+        "type": "currency",
+        "description": "Total invoice amount in EUR including VAT",
+        "validationRules": "Required. Currency: EUR. Positive value. Two decimal places.",
+        "retentionPolicy": "Retained with invoice record",
+        "archivingRules": "Retained for revenue recognition and financial statements"
+      },
+      {
+        "name": "Due Date",
+        "type": "date",
+        "description": "Payment due date calculated from payment terms",
+        "validationRules": "Required. Format: YYYY-MM-DD. Calculated from invoice date + payment terms.",
+        "retentionPolicy": "Retained with invoice record",
+        "archivingRules": "Retained for aging analysis and DSO tracking"
+      },
+      {
+        "name": "Status",
+        "type": "enum",
+        "description": "Current payment status of the invoice",
+        "validationRules": "Required. One of: Draft, Sent, Paid, Overdue, Cancelled.",
+        "retentionPolicy": "Updated with payment events",
+        "archivingRules": "Final status retained for accounts receivable reporting"
+      },
+      {
+        "name": "Payment Method",
+        "type": "enum",
+        "description": "Method used or to be used for payment",
+        "validationRules": "Required when status is Paid. One of: Bank Transfer, Direct Debit, Credit Card.",
+        "retentionPolicy": "Retained with invoice record",
+        "archivingRules": "Retained for payment method analytics and reconciliation"
+      }
+    ]
+  },
+  {
+    "id": "be-delivery-order",
+    "name": "Delivery Order",
+    "description": "Shipment order for delivery or return of rented equipment",
+    "knowledgeDomainId": "kd-order-mgmt",
+    "attributes": [
+      {
+        "name": "Delivery ID",
+        "type": "string",
+        "description": "Unique delivery shipment identifier auto-generated at creation",
+        "validationRules": "Auto-generated. Format: DEL-YYYY-NNNNN. Unique and immutable.",
+        "retentionPolicy": "Retained 3 years for logistics and customer service records",
+        "archivingRules": "Archived with carrier and tracking information for logistics history"
+      },
+      {
+        "name": "Order ID",
+        "type": "reference",
+        "description": "Reference to the rental order this delivery fulfills",
+        "validationRules": "Required. Must reference existing be-rental-order.",
+        "retentionPolicy": "Retained with delivery record",
+        "archivingRules": "Retained to maintain order-delivery linkage"
+      },
+      {
+        "name": "Pickup/Delivery Type",
+        "type": "enum",
+        "description": "Type of delivery operation",
+        "validationRules": "Required. One of: Delivery (new rental), Return (end of rental), Swap (equipment exchange).",
+        "retentionPolicy": "Retained with delivery record",
+        "archivingRules": "Retained for logistics operation type metrics"
+      },
+      {
+        "name": "Scheduled Date",
+        "type": "date",
+        "description": "Date scheduled for delivery or pickup",
+        "validationRules": "Required. Format: YYYY-MM-DD. Must be on or after order date.",
+        "retentionPolicy": "Retained with delivery record",
+        "archivingRules": "Retained for on-time delivery metrics"
+      },
+      {
+        "name": "Actual Date",
+        "type": "date",
+        "description": "Actual date delivery or pickup was completed",
+        "validationRules": "Optional. Format: YYYY-MM-DD. Only populated after completion.",
+        "retentionPolicy": "Retained with delivery record",
+        "archivingRules": "Retained for delivery performance analytics"
+      },
+      {
+        "name": "Status",
+        "type": "enum",
+        "description": "Current status of the delivery operation",
+        "validationRules": "Required. One of: Planned, In Transit, Delivered, Failed.",
+        "retentionPolicy": "Updated in real-time until completion",
+        "archivingRules": "Final status retained for operation outcome analysis"
+      },
+      {
+        "name": "Carrier",
+        "type": "string",
+        "description": "Name of logistics carrier handling the shipment",
+        "validationRules": "Required. Max 100 characters. Standardized carrier list.",
+        "retentionPolicy": "Retained with delivery record",
+        "archivingRules": "Retained for carrier performance evaluation"
+      }
+    ]
+  },
+  {
+    "id": "be-maintenance-record",
+    "name": "Maintenance Record",
+    "description": "Service record documenting maintenance, repair, or inspection of equipment",
+    "knowledgeDomainId": "kd-asset-mgmt",
+    "attributes": [
+      {
+        "name": "Record ID",
+        "type": "string",
+        "description": "Unique maintenance record identifier auto-generated at creation",
+        "validationRules": "Auto-generated. Format: MNT-YYYY-NNNNN. Unique and immutable.",
+        "retentionPolicy": "Retained 7 years with device for warranty and liability purposes",
+        "archivingRules": "Archived with device history for full equipment lifecycle documentation"
+      },
+      {
+        "name": "Device Serial",
+        "type": "reference",
+        "description": "Reference to the device being serviced",
+        "validationRules": "Required. Must reference existing be-device by serial number.",
+        "retentionPolicy": "Retained with maintenance record",
+        "archivingRules": "Retained to maintain service history linkage"
+      },
+      {
+        "name": "Type",
+        "type": "enum",
+        "description": "Category of maintenance work performed",
+        "validationRules": "Required. One of: Scheduled (preventive), Repair (corrective), Upgrade (enhancement), Inspection (quality check).",
+        "retentionPolicy": "Retained with maintenance record",
+        "archivingRules": "Retained for maintenance type analytics and preventive maintenance tracking"
+      },
+      {
+        "name": "Date",
+        "type": "date",
+        "description": "Date the maintenance work was performed",
+        "validationRules": "Required. Format: YYYY-MM-DD.",
+        "retentionPolicy": "Retained with maintenance record",
+        "archivingRules": "Retained for maintenance scheduling and device age analysis"
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "description": "Detailed description of work performed and findings",
+        "validationRules": "Required. Free text. Max 2000 characters.",
+        "retentionPolicy": "Retained with maintenance record",
+        "archivingRules": "Retained for technical history and troubleshooting reference"
+      },
+      {
+        "name": "Cost",
+        "type": "currency",
+        "description": "Cost of maintenance work performed in EUR",
+        "validationRules": "Required. Currency: EUR. Non-negative value. Two decimal places.",
+        "retentionPolicy": "Retained with maintenance record",
+        "archivingRules": "Retained for cost analysis and ROI calculations"
+      },
+      {
+        "name": "Technician",
+        "type": "reference",
+        "description": "Employee who performed the maintenance work",
+        "validationRules": "Required. Must reference existing be-employee.",
+        "retentionPolicy": "Retained with maintenance record",
+        "archivingRules": "Retained for technician skill tracking and quality metrics"
+      },
+      {
+        "name": "Status",
+        "type": "enum",
+        "description": "Current status of the maintenance work",
+        "validationRules": "Required. One of: Open (pending), In Progress, Completed, Cancelled.",
+        "retentionPolicy": "Updated until completion",
+        "archivingRules": "Final status retained for work completion metrics"
+      }
+    ]
+  },
+  {
+    "id": "be-support-ticket",
+    "name": "Support Ticket",
+    "description": "Customer support request for assistance with rental equipment or services",
+    "knowledgeDomainId": "kd-support",
+    "attributes": [
+      {
+        "name": "Ticket ID",
+        "type": "string",
+        "description": "Unique support ticket identifier auto-generated at creation",
+        "validationRules": "Auto-generated. Format: TKT-YYYYMMDD-NNNN. Unique and immutable.",
+        "retentionPolicy": "Retained 3 years for customer service history",
+        "archivingRules": "Archived with ticket conversations for customer service analytics"
+      },
+      {
+        "name": "Customer ID",
+        "type": "reference",
+        "description": "Reference to the customer reporting the issue",
+        "validationRules": "Required. Must reference existing be-customer.",
+        "retentionPolicy": "Retained with ticket record",
+        "archivingRules": "Retained to maintain customer-ticket relationship"
+      },
+      {
+        "name": "Device Serial",
+        "type": "reference",
+        "description": "Reference to affected device if issue is device-specific",
+        "validationRules": "Optional. Must reference existing be-device if populated.",
+        "retentionPolicy": "Retained with ticket record if applicable",
+        "archivingRules": "Retained for device-specific issue tracking"
+      },
+      {
+        "name": "Priority",
+        "type": "enum",
+        "description": "Urgency level for ticket resolution",
+        "validationRules": "Required. One of: Low (72h SLA), Medium (24h SLA), High (4h SLA), Critical (1h SLA).",
+        "retentionPolicy": "Retained with ticket record",
+        "archivingRules": "Retained for SLA compliance reporting"
+      },
+      {
+        "name": "Category",
+        "type": "enum",
+        "description": "Type of support issue",
+        "validationRules": "Required. One of: Hardware (device malfunction), Software (app/OS issue), Delivery (shipment problem), Billing (invoice/payment), General (other).",
+        "retentionPolicy": "Retained with ticket record",
+        "archivingRules": "Retained for issue category analytics and training needs"
+      },
+      {
+        "name": "Status",
+        "type": "enum",
+        "description": "Current resolution status of the ticket",
+        "validationRules": "Required. One of: Open, In Progress, Waiting (for customer response), Resolved, Closed.",
+        "retentionPolicy": "Updated in real-time through resolution",
+        "archivingRules": "Final status retained for resolution metrics"
+      },
+      {
+        "name": "Assigned To",
+        "type": "reference",
+        "description": "Employee assigned to resolve this ticket",
+        "validationRules": "Required. Must reference existing be-employee. Updated when reassigned.",
+        "retentionPolicy": "Updated with each assignment change",
+        "archivingRules": "Final assignee retained for resolution accountability"
+      },
+      {
+        "name": "Resolution Time SLA",
+        "type": "string",
+        "description": "Target resolution time based on priority level",
+        "validationRules": "Auto-calculated from priority. Format: Xh (hours) or Xd (days). Read-only.",
+        "retentionPolicy": "Retained with ticket record",
+        "archivingRules": "Retained for SLA compliance and performance tracking"
+      }
+    ]
+  },
+  {
+    "id": "be-employee",
+    "name": "Employee",
+    "description": "Internal employee record for staff management and HR purposes",
+    "knowledgeDomainId": "kd-hr",
+    "attributes": [
+      {
+        "name": "Employee ID",
+        "type": "string",
+        "description": "Unique employee identifier assigned at hiring",
+        "validationRules": "Required. Format: EMP-YYYYNNN. Unique and immutable.",
+        "retentionPolicy": "Permanent while employed; retained 10 years after termination",
+        "archivingRules": "Archived with employment history for HR and tax records"
+      },
+      {
+        "name": "Name",
+        "type": "string",
+        "description": "Full legal name of the employee",
+        "validationRules": "Required. Max 200 characters. First and last name.",
+        "retentionPolicy": "Retained during employment and 10 years after termination",
+        "archivingRules": "Retained in anonymized form for statistical HR analysis"
+      },
+      {
+        "name": "Department",
+        "type": "reference",
+        "description": "Reference to organizational department",
+        "validationRules": "Required. Must reference valid department. Updated on transfer.",
+        "retentionPolicy": "Updated with departmental changes",
+        "archivingRules": "Department history retained for org structure tracking"
+      },
+      {
+        "name": "Role",
+        "type": "string",
+        "description": "Job title or position of the employee",
+        "validationRules": "Required. Max 100 characters. From standardized role list.",
+        "retentionPolicy": "Updated with role changes",
+        "archivingRules": "Role history retained for career progression analysis"
+      },
+      {
+        "name": "Start Date",
+        "type": "date",
+        "description": "Date the employee commenced employment",
+        "validationRules": "Required. Format: YYYY-MM-DD. Immutable once set.",
+        "retentionPolicy": "Retained permanently for seniority calculation",
+        "archivingRules": "Retained for tenure and benefits calculations"
+      },
+      {
+        "name": "Employment Type",
+        "type": "enum",
+        "description": "Classification of employment arrangement",
+        "validationRules": "Required. One of: Full-time, Part-time, Contract.",
+        "retentionPolicy": "Retained with employee record; updated if status changes",
+        "archivingRules": "Final employment type retained for severance calculations"
+      }
+    ]
+  },
+  {
+    "id": "be-knowledge-article",
+    "name": "Knowledge Article",
+    "description": "Internal documentation and knowledge base article for process, training, and best practices",
+    "knowledgeDomainId": "kd-internal",
+    "attributes": [
+      {
+        "name": "Article ID",
+        "type": "string",
+        "description": "Unique article identifier auto-generated at creation",
+        "validationRules": "Auto-generated. Format: KA-YYYY-NNNNN. Unique and immutable.",
+        "retentionPolicy": "Retained as long as article is published or 5 years if archived",
+        "archivingRules": "Archived version history maintained for document control"
+      },
+      {
+        "name": "Title",
+        "type": "string",
+        "description": "Article title or heading",
+        "validationRules": "Required. Max 200 characters. Descriptive and searchable.",
+        "retentionPolicy": "Retained with article",
+        "archivingRules": "Retained in archive for document indexing"
+      },
+      {
+        "name": "Category",
+        "type": "enum",
+        "description": "Type of knowledge documented",
+        "validationRules": "Required. One of: Process (documented workflows), Template (reusable forms), Best Practice (guidance), FAQ (common questions), Training (instructional).",
+        "retentionPolicy": "Retained with article",
+        "archivingRules": "Retained for content categorization"
+      },
+      {
+        "name": "Author",
+        "type": "reference",
+        "description": "Employee who created or owns the article",
+        "validationRules": "Required. Must reference existing be-employee.",
+        "retentionPolicy": "Retained with article",
+        "archivingRules": "Retained for accountability and content ownership tracking"
+      },
+      {
+        "name": "Last Updated",
+        "type": "date",
+        "description": "Date of the most recent update to the article",
+        "validationRules": "Required. Format: YYYY-MM-DD. Auto-updated on edits.",
+        "retentionPolicy": "Updated with each article modification",
+        "archivingRules": "Update history maintained for version control"
+      },
+      {
+        "name": "Status",
+        "type": "enum",
+        "description": "Publication and review status of the article",
+        "validationRules": "Required. One of: Draft (in progress), Published (available), Archived (obsolete).",
+        "retentionPolicy": "Updated through article lifecycle",
+        "archivingRules": "Final status retained; published and archived versions retained"
+      },
+      {
+        "name": "Access Level",
+        "type": "enum",
+        "description": "Who can access this knowledge article",
+        "validationRules": "Required. One of: All (company-wide), Department (specific department), Management (leadership only).",
+        "retentionPolicy": "Updated if access needs change",
+        "archivingRules": "Access level retained to control archived content visibility"
+      }
+    ]
+  }
+]

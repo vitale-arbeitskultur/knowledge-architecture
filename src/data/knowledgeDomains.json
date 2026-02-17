@@ -1,0 +1,56 @@
+[
+  {
+    "id": "kd-client-mgmt",
+    "name": "Client Management",
+    "description": "Customer profiles, contact history, preferences, and relationship data",
+    "knowledgeOwnerRoleId": "role-ko-client-mgmt"
+  },
+  {
+    "id": "kd-sales",
+    "name": "Sales",
+    "description": "Sales pipeline, pricing strategies, proposals, and revenue forecasting",
+    "knowledgeOwnerRoleId": "role-ko-sales"
+  },
+  {
+    "id": "kd-order-mgmt",
+    "name": "Order Management",
+    "description": "Order processing, fulfillment scheduling, and delivery coordination",
+    "knowledgeOwnerRoleId": "role-ko-order-mgmt"
+  },
+  {
+    "id": "kd-asset-mgmt",
+    "name": "Asset Management",
+    "description": "Equipment inventory, device lifecycle, maintenance history, and condition tracking",
+    "knowledgeOwnerRoleId": "role-ko-asset-mgmt"
+  },
+  {
+    "id": "kd-contract-mgmt",
+    "name": "Contract Management",
+    "description": "Rental agreements, terms and conditions, SLAs, and legal compliance",
+    "knowledgeOwnerRoleId": "role-ko-contract-mgmt"
+  },
+  {
+    "id": "kd-finance",
+    "name": "Finance & Billing",
+    "description": "Invoicing, payment processing, revenue recognition, and financial reporting",
+    "knowledgeOwnerRoleId": "role-ko-finance"
+  },
+  {
+    "id": "kd-support",
+    "name": "Support & Service",
+    "description": "Technical support procedures, troubleshooting guides, SLA management, and issue resolution",
+    "knowledgeOwnerRoleId": "role-ko-support"
+  },
+  {
+    "id": "kd-internal",
+    "name": "Internal Knowledge",
+    "description": "Company processes, templates, best practices, and operational procedures",
+    "knowledgeOwnerRoleId": "role-ko-internal"
+  },
+  {
+    "id": "kd-hr",
+    "name": "Human Resources",
+    "description": "Employee data, training records, organizational structure, and HR policies",
+    "knowledgeOwnerRoleId": "role-ko-hr"
+  }
+]

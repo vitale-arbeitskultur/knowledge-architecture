@@ -1,0 +1,202 @@
+[
+  {
+    "id": "role-km-architect",
+    "name": "Knowledge Management Architect",
+    "type": "governance",
+    "description": "Oversees the overall knowledge management architecture and methodology",
+    "personId": "per-neumann",
+    "scope": {"type": "organization", "id": "org"}
+  },
+  {
+    "id": "role-ko-client-mgmt",
+    "name": "Knowledge Owner – Client Management",
+    "type": "governance",
+    "description": "Responsible for knowledge quality and governance in the Client Management domain",
+    "personId": "per-mueller",
+    "scope": {"type": "knowledgeDomain", "id": "kd-client-mgmt"}
+  },
+  {
+    "id": "role-ko-sales",
+    "name": "Knowledge Owner – Sales",
+    "type": "governance",
+    "description": "Responsible for knowledge quality and governance in the Sales domain",
+    "personId": "per-mueller",
+    "scope": {"type": "knowledgeDomain", "id": "kd-sales"}
+  },
+  {
+    "id": "role-ko-order-mgmt",
+    "name": "Knowledge Owner – Order Management",
+    "type": "governance",
+    "description": "Responsible for knowledge quality and governance in the Order Management domain",
+    "personId": "per-braun",
+    "scope": {"type": "knowledgeDomain", "id": "kd-order-mgmt"}
+  },
+  {
+    "id": "role-ko-asset-mgmt",
+    "name": "Knowledge Owner – Asset Management",
+    "type": "governance",
+    "description": "Responsible for knowledge quality and governance in the Asset Management domain",
+    "personId": "per-braun",
+    "scope": {"type": "knowledgeDomain", "id": "kd-asset-mgmt"}
+  },
+  {
+    "id": "role-ko-contract-mgmt",
+    "name": "Knowledge Owner – Contract Management",
+    "type": "governance",
+    "description": "Responsible for knowledge quality and governance in the Contract Management domain",
+    "personId": "per-klein",
+    "scope": {"type": "knowledgeDomain", "id": "kd-contract-mgmt"}
+  },
+  {
+    "id": "role-ko-finance",
+    "name": "Knowledge Owner – Finance & Billing",
+    "type": "governance",
+    "description": "Responsible for knowledge quality and governance in the Finance & Billing domain",
+    "personId": "per-fischer",
+    "scope": {"type": "knowledgeDomain", "id": "kd-finance"}
+  },
+  {
+    "id": "role-ko-support",
+    "name": "Knowledge Owner – Support & Service",
+    "type": "governance",
+    "description": "Responsible for knowledge quality and governance in the Support & Service domain",
+    "personId": "per-richter",
+    "scope": {"type": "knowledgeDomain", "id": "kd-support"}
+  },
+  {
+    "id": "role-ko-internal",
+    "name": "Knowledge Owner – Internal Knowledge",
+    "type": "governance",
+    "description": "Responsible for knowledge quality and governance in the Internal Knowledge domain",
+    "personId": "per-neumann",
+    "scope": {"type": "knowledgeDomain", "id": "kd-internal"}
+  },
+  {
+    "id": "role-ko-hr",
+    "name": "Knowledge Owner – Human Resources",
+    "type": "governance",
+    "description": "Responsible for knowledge quality and governance in the Human Resources domain",
+    "personId": "per-schaefer",
+    "scope": {"type": "knowledgeDomain", "id": "kd-hr"}
+  },
+  {
+    "id": "role-ao-rental-system",
+    "name": "Application Owner – Rental System",
+    "type": "governance",
+    "description": "Responsible for rental system application strategy, vendor management, and user enablement",
+    "personId": "per-neumann",
+    "scope": {"type": "application", "id": "app-rental-system"}
+  },
+  {
+    "id": "role-ao-crm",
+    "name": "Application Owner – CRM",
+    "type": "governance",
+    "description": "Responsible for CRM application strategy, vendor management, and user enablement",
+    "personId": "per-mueller",
+    "scope": {"type": "application", "id": "app-crm"}
+  },
+  {
+    "id": "role-ao-inventory",
+    "name": "Application Owner – Inventory System",
+    "type": "governance",
+    "description": "Responsible for inventory system application strategy, vendor management, and user enablement",
+    "personId": "per-braun",
+    "scope": {"type": "application", "id": "app-inventory"}
+  },
+  {
+    "id": "role-ao-asset-tracking",
+    "name": "Application Owner – Asset Tracking",
+    "type": "governance",
+    "description": "Responsible for asset tracking application strategy, vendor management, and user enablement",
+    "personId": "per-braun",
+    "scope": {"type": "application", "id": "app-asset-tracking"}
+  },
+  {
+    "id": "role-ao-billing",
+    "name": "Application Owner – Billing System",
+    "type": "governance",
+    "description": "Responsible for billing system application strategy, vendor management, and user enablement",
+    "personId": "per-fischer",
+    "scope": {"type": "application", "id": "app-billing"}
+  },
+  {
+    "id": "role-ao-delivery",
+    "name": "Application Owner – Delivery Management",
+    "type": "governance",
+    "description": "Responsible for delivery management application strategy, vendor management, and user enablement",
+    "personId": "per-weber",
+    "scope": {"type": "application", "id": "app-delivery"}
+  },
+  {
+    "id": "role-ao-teams",
+    "name": "Application Owner – Microsoft Teams",
+    "type": "governance",
+    "description": "Responsible for Microsoft Teams application strategy, governance, and user enablement",
+    "personId": "per-neumann",
+    "scope": {"type": "application", "id": "app-teams"}
+  },
+  {
+    "id": "role-ao-confluence",
+    "name": "Application Owner – Confluence",
+    "type": "governance",
+    "description": "Responsible for Confluence application strategy, governance, and user enablement",
+    "personId": "per-neumann",
+    "scope": {"type": "application", "id": "app-confluence"}
+  },
+  {
+    "id": "role-ao-outlook",
+    "name": "Application Owner – Outlook",
+    "type": "governance",
+    "description": "Responsible for Outlook application strategy, governance, and user enablement",
+    "personId": "per-neumann",
+    "scope": {"type": "application", "id": "app-outlook"}
+  },
+  {
+    "id": "role-ao-analytics",
+    "name": "Application Owner – Analytics Platform",
+    "type": "governance",
+    "description": "Responsible for analytics platform application strategy, vendor management, and user enablement",
+    "personId": "per-zimmermann",
+    "scope": {"type": "application", "id": "app-analytics"}
+  },
+  {
+    "id": "role-ao-finance-system",
+    "name": "Application Owner – Finance System",
+    "type": "governance",
+    "description": "Responsible for finance system application strategy, vendor management, and user enablement",
+    "personId": "per-fischer",
+    "scope": {"type": "application", "id": "app-finance-system"}
+  },
+  {
+    "id": "role-ao-hr-system",
+    "name": "Application Owner – HR System",
+    "type": "governance",
+    "description": "Responsible for HR system application strategy, vendor management, and user enablement",
+    "personId": "per-schaefer",
+    "scope": {"type": "application", "id": "app-hr-system"}
+  },
+  {
+    "id": "role-ao-sharepoint",
+    "name": "Application Owner – SharePoint",
+    "type": "governance",
+    "description": "Responsible for SharePoint application strategy, governance, and user enablement",
+    "personId": "per-neumann",
+    "scope": {"type": "application", "id": "app-sharepoint"}
+  },
+  {
+    "id": "role-ao-website",
+    "name": "Application Owner – Website",
+    "type": "governance",
+    "description": "Responsible for website application strategy, vendor management, and user enablement",
+    "personId": "per-keller",
+    "scope": {"type": "application", "id": "app-website"}
+  },
+  {
+    "id": "role-ao-customer-portal",
+    "name": "Application Owner – Customer Portal",
+    "type": "governance",
+    "description": "Responsible for customer portal application strategy, vendor management, and user enablement",
+    "personId": "per-neumann",
+    "scope": {"type": "application", "id": "app-customer-portal"}
+  }
+]

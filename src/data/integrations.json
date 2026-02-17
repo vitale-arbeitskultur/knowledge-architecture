@@ -1,0 +1,174 @@
+[
+  {
+    "id": "int-01",
+    "name": "Website → CRM – Lead capture",
+    "description": "Contact form submissions and inquiry requests automatically create leads in CRM system",
+    "sourceApplicationId": "app-website",
+    "targetApplicationId": "app-crm",
+    "type": "webhook",
+    "maturity": "automated",
+    "reliability": "high",
+    "frequency": "event-triggered",
+    "entityInteractions": [
+      { "entityId": "be-lead", "operation": "create" }
+    ]
+  },
+  {
+    "id": "int-02",
+    "name": "CRM → Rental System – Customer sync",
+    "description": "Customer data and account information synced in real-time between CRM and rental management system",
+    "sourceApplicationId": "app-crm",
+    "targetApplicationId": "app-rental-system",
+    "type": "api",
+    "maturity": "automated",
+    "reliability": "high",
+    "frequency": "real-time",
+    "entityInteractions": [
+      { "entityId": "be-customer", "operation": "create" },
+      { "entityId": "be-customer", "operation": "update" }
+    ]
+  },
+  {
+    "id": "int-03",
+    "name": "Rental System → Inventory – Equipment reservation",
+    "description": "Equipment reservations trigger inventory allocation and stock adjustments in real-time",
+    "sourceApplicationId": "app-rental-system",
+    "targetApplicationId": "app-inventory",
+    "type": "api",
+    "maturity": "automated",
+    "reliability": "medium",
+    "frequency": "real-time",
+    "entityInteractions": [
+      { "entityId": "be-device", "operation": "update" },
+      { "entityId": "be-rental-order", "operation": "read" }
+    ]
+  },
+  {
+    "id": "int-04",
+    "name": "Rental System → Billing – Invoice generation",
+    "description": "Contract milestones and events trigger invoice generation in billing system",
+    "sourceApplicationId": "app-rental-system",
+    "targetApplicationId": "app-billing",
+    "type": "api",
+    "maturity": "semi-automated",
+    "reliability": "medium",
+    "frequency": "event-triggered",
+    "entityInteractions": [
+      { "entityId": "be-invoice", "operation": "create" },
+      { "entityId": "be-rental-contract", "operation": "read" }
+    ]
+  },
+  {
+    "id": "int-05",
+    "name": "Rental System → Delivery – Shipment scheduling",
+    "description": "Confirmed orders automatically create delivery orders and schedule pickup from warehouse",
+    "sourceApplicationId": "app-rental-system",
+    "targetApplicationId": "app-delivery",
+    "type": "api",
+    "maturity": "semi-automated",
+    "reliability": "medium",
+    "frequency": "event-triggered",
+    "entityInteractions": [
+      { "entityId": "be-delivery-order", "operation": "create" }
+    ]
+  },
+  {
+    "id": "int-06",
+    "name": "Asset Tracking → Inventory – Device location sync",
+    "description": "Device GPS and location data synced in real-time to update inventory location records",
+    "sourceApplicationId": "app-asset-tracking",
+    "targetApplicationId": "app-inventory",
+    "type": "api",
+    "maturity": "automated",
+    "reliability": "high",
+    "frequency": "real-time",
+    "entityInteractions": [
+      { "entityId": "be-device", "operation": "update" }
+    ]
+  },
+  {
+    "id": "int-07",
+    "name": "Billing → Finance System – Accounting sync",
+    "description": "Daily export of billing records to finance system for accounting reconciliation and GL posting",
+    "sourceApplicationId": "app-billing",
+    "targetApplicationId": "app-finance-system",
+    "type": "file",
+    "maturity": "manual-with-template",
+    "reliability": "medium",
+    "frequency": "daily",
+    "entityInteractions": [
+      { "entityId": "be-invoice", "operation": "read" }
+    ]
+  },
+  {
+    "id": "int-08",
+    "name": "CRM → Outlook – Email tracking",
+    "description": "CRM integrates with Outlook for email tracking, meeting invitations, and contact synchronization",
+    "sourceApplicationId": "app-crm",
+    "targetApplicationId": "app-outlook",
+    "type": "api",
+    "maturity": "automated",
+    "reliability": "high",
+    "frequency": "real-time",
+    "entityInteractions": [
+      { "entityId": "be-customer", "operation": "read" }
+    ]
+  },
+  {
+    "id": "int-09",
+    "name": "CRM → Teams – Deal notifications",
+    "description": "Deal stage changes and customer updates pushed as notifications to Teams channels for visibility",
+    "sourceApplicationId": "app-crm",
+    "targetApplicationId": "app-teams",
+    "type": "webhook",
+    "maturity": "automated",
+    "reliability": "high",
+    "frequency": "event-triggered",
+    "entityInteractions": [
+      { "entityId": "be-lead", "operation": "read" },
+      { "entityId": "be-customer", "operation": "read" }
+    ]
+  },
+  {
+    "id": "int-10",
+    "name": "Customer Portal → Rental System – Order submission",
+    "description": "Customer portal order requests automatically create rental orders in system with full details",
+    "sourceApplicationId": "app-customer-portal",
+    "targetApplicationId": "app-rental-system",
+    "type": "api",
+    "maturity": "automated",
+    "reliability": "medium",
+    "frequency": "event-triggered",
+    "entityInteractions": [
+      { "entityId": "be-rental-order", "operation": "create" }
+    ]
+  },
+  {
+    "id": "int-11",
+    "name": "Teams → Confluence – Meeting notes",
+    "description": "Support team manually documents Teams meeting notes and decisions in Confluence knowledge base",
+    "sourceApplicationId": "app-teams",
+    "targetApplicationId": "app-confluence",
+    "type": "manual",
+    "maturity": "manual-adhoc",
+    "reliability": "low",
+    "frequency": "on-demand",
+    "entityInteractions": [
+      { "entityId": "be-knowledge-article", "operation": "create" }
+    ]
+  },
+  {
+    "id": "int-12",
+    "name": "HR System → Finance System – Payroll data",
+    "description": "Monthly export of employee payroll data from HR to finance system for accounting and expense posting",
+    "sourceApplicationId": "app-hr-system",
+    "targetApplicationId": "app-finance-system",
+    "type": "file",
+    "maturity": "manual-with-template",
+    "reliability": "low",
+    "frequency": "daily",
+    "entityInteractions": [
+      { "entityId": "be-employee", "operation": "read" }
+    ]
+  }
+]

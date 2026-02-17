@@ -1,0 +1,81 @@
+[
+  {
+    "id": "team-management",
+    "name": "Management",
+    "description": "Strategic leadership and organizational governance",
+    "roles": [
+      {"id": "role-ceo", "name": "CEO", "personId": "per-schneider"},
+      {"id": "role-cfo", "name": "CFO", "personId": "per-zimmermann"},
+      {"id": "role-coo", "name": "COO", "personId": "per-klein"}
+    ]
+  },
+  {
+    "id": "team-sales",
+    "name": "Sales",
+    "description": "Client acquisition, relationship management, and revenue generation",
+    "roles": [
+      {"id": "role-sales-director", "name": "Sales Director", "personId": "per-mueller"},
+      {"id": "role-account-manager", "name": "Account Manager", "personIds": ["per-schmidt", "per-hoffmann", "per-wolf"]},
+      {"id": "role-inside-sales", "name": "Inside Sales", "personId": "per-vogt"}
+    ]
+  },
+  {
+    "id": "team-marketing",
+    "name": "Marketing",
+    "description": "Brand visibility, content creation, and demand generation",
+    "roles": [
+      {"id": "role-marketing-manager", "name": "Marketing Manager", "personId": "per-keller"},
+      {"id": "role-content-creator", "name": "Content Creator", "personId": "per-roth"}
+    ]
+  },
+  {
+    "id": "team-operations",
+    "name": "Operations",
+    "description": "Inventory management, logistics, equipment preparation, and fulfillment",
+    "roles": [
+      {"id": "role-ops-manager", "name": "Operations Manager", "personId": "per-braun"},
+      {"id": "role-inventory-manager", "name": "Inventory Manager", "personIds": ["per-hartmann", "per-lehmann"]},
+      {"id": "role-logistics-lead", "name": "Logistics Lead", "personId": "per-weber"},
+      {"id": "role-logistics-specialist", "name": "Logistics Specialist", "personId": "per-kern"},
+      {"id": "role-equipment-technician", "name": "Equipment Technician", "personId": "per-huber"}
+    ]
+  },
+  {
+    "id": "team-support",
+    "name": "Support",
+    "description": "Technical support, maintenance, and customer issue resolution",
+    "roles": [
+      {"id": "role-support-manager", "name": "Support Manager", "personId": "per-richter"},
+      {"id": "role-support-specialist", "name": "Support Specialist", "personIds": ["per-krause", "per-berger"]},
+      {"id": "role-field-technician", "name": "Field Technician", "personId": "per-maier"}
+    ]
+  },
+  {
+    "id": "team-finance",
+    "name": "Finance",
+    "description": "Invoicing, payment processing, and financial reporting",
+    "roles": [
+      {"id": "role-finance-manager", "name": "Finance Manager", "personId": "per-fischer"},
+      {"id": "role-accountant", "name": "Accountant", "personId": "per-schwarz"},
+      {"id": "role-billing-specialist", "name": "Billing Specialist", "personId": "per-baumann"}
+    ]
+  },
+  {
+    "id": "team-it",
+    "name": "IT",
+    "description": "Technology infrastructure, systems management, and knowledge management",
+    "roles": [
+      {"id": "role-it-manager", "name": "IT Manager", "personId": "per-neumann"},
+      {"id": "role-sys-admin", "name": "System Administrator", "personId": "per-koch"},
+      {"id": "role-network-admin", "name": "Network Administrator", "personId": "per-frank"}
+    ]
+  },
+  {
+    "id": "team-hr",
+    "name": "Human Resources",
+    "description": "People management, recruiting, and organizational development",
+    "roles": [
+      {"id": "role-hr-manager", "name": "HR Manager", "personId": "per-schaefer"}
+    ]
+  }
+]

@@ -1,0 +1,152 @@
+[
+  {
+    "id": "app-rental-system",
+    "name": "RentalDesk",
+    "description": "Core rental management platform handling orders, contracts, and asset allocation",
+    "category": "Operations",
+    "url": "https://rentaldesk.company.local",
+    "applicationOwnerRoleId": "role-ao-rental-system",
+    "knowledgeDomainIds": ["kd-order-mgmt", "kd-asset-mgmt", "kd-contract-mgmt"],
+    "strategicClassification": "invest"
+  },
+  {
+    "id": "app-crm",
+    "name": "HubSpot CRM",
+    "description": "Customer relationship management system for sales pipeline and client interactions",
+    "category": "CRM",
+    "url": "https://hubspot.company.com",
+    "applicationOwnerRoleId": "role-ao-crm",
+    "knowledgeDomainIds": ["kd-client-mgmt", "kd-sales"],
+    "strategicClassification": "invest"
+  },
+  {
+    "id": "app-inventory",
+    "name": "InventoryPro",
+    "description": "Equipment inventory and warehouse management system",
+    "category": "Operations",
+    "url": "https://inventory.company.local",
+    "applicationOwnerRoleId": "role-ao-inventory",
+    "knowledgeDomainIds": ["kd-asset-mgmt", "kd-order-mgmt"],
+    "strategicClassification": "keep"
+  },
+  {
+    "id": "app-asset-tracking",
+    "name": "AssetTracker",
+    "description": "RFID and barcode-based physical equipment tracking and location management",
+    "category": "Operations",
+    "url": "https://assettracker.company.local",
+    "applicationOwnerRoleId": "role-ao-asset-tracking",
+    "knowledgeDomainIds": ["kd-asset-mgmt"],
+    "strategicClassification": "invest"
+  },
+  {
+    "id": "app-billing",
+    "name": "BillingSuite",
+    "description": "Invoice generation, payment processing, and revenue management",
+    "category": "Finance",
+    "url": "https://billing.company.local",
+    "applicationOwnerRoleId": "role-ao-billing",
+    "knowledgeDomainIds": ["kd-finance"],
+    "strategicClassification": "keep"
+  },
+  {
+    "id": "app-delivery",
+    "name": "LogiTrack",
+    "description": "Delivery scheduling, route optimization, and shipment tracking",
+    "category": "Operations",
+    "url": "https://logitrack.company.local",
+    "applicationOwnerRoleId": "role-ao-delivery",
+    "knowledgeDomainIds": ["kd-order-mgmt"],
+    "strategicClassification": "tolerate"
+  },
+  {
+    "id": "app-teams",
+    "name": "Microsoft Teams",
+    "description": "Internal and external communication, collaboration, and video conferencing",
+    "category": "Communication",
+    "url": "https://teams.microsoft.com",
+    "applicationOwnerRoleId": "role-ao-teams",
+    "knowledgeDomainIds": ["kd-internal"],
+    "strategicClassification": "invest"
+  },
+  {
+    "id": "app-confluence",
+    "name": "Confluence",
+    "description": "Wiki and documentation platform for internal knowledge and process documentation",
+    "category": "Documentation",
+    "url": "https://confluence.company.local",
+    "applicationOwnerRoleId": "role-ao-confluence",
+    "knowledgeDomainIds": ["kd-internal", "kd-support"],
+    "strategicClassification": "keep"
+  },
+  {
+    "id": "app-outlook",
+    "name": "Microsoft Outlook",
+    "description": "Email and calendar management for internal and client communications",
+    "category": "Communication",
+    "url": "https://outlook.office365.com",
+    "applicationOwnerRoleId": "role-ao-outlook",
+    "knowledgeDomainIds": ["kd-client-mgmt", "kd-internal"],
+    "strategicClassification": "keep"
+  },
+  {
+    "id": "app-analytics",
+    "name": "Power BI",
+    "description": "Business intelligence, analytics, and reporting dashboards",
+    "category": "Analytics",
+    "url": "https://powerbi.company.local",
+    "applicationOwnerRoleId": "role-ao-analytics",
+    "knowledgeDomainIds": ["kd-sales", "kd-finance", "kd-asset-mgmt"],
+    "strategicClassification": "invest"
+  },
+  {
+    "id": "app-finance-system",
+    "name": "DATEV",
+    "description": "Accounting, general ledger, and financial planning system",
+    "category": "Finance",
+    "url": "https://datev.company.local",
+    "applicationOwnerRoleId": "role-ao-finance-system",
+    "knowledgeDomainIds": ["kd-finance", "kd-hr"],
+    "strategicClassification": "keep"
+  },
+  {
+    "id": "app-hr-system",
+    "name": "Personio",
+    "description": "Human resources management, payroll, and employee administration",
+    "category": "HR",
+    "url": "https://personio.company.com",
+    "applicationOwnerRoleId": "role-ao-hr-system",
+    "knowledgeDomainIds": ["kd-hr"],
+    "strategicClassification": "keep"
+  },
+  {
+    "id": "app-sharepoint",
+    "name": "SharePoint",
+    "description": "Document management, file sharing, and collaborative workspace",
+    "category": "Documentation",
+    "url": "https://company.sharepoint.com",
+    "applicationOwnerRoleId": "role-ao-sharepoint",
+    "knowledgeDomainIds": ["kd-internal", "kd-contract-mgmt"],
+    "strategicClassification": "tolerate"
+  },
+  {
+    "id": "app-website",
+    "name": "Company Website",
+    "description": "Public website with equipment catalog, pricing, and customer information",
+    "category": "Marketing",
+    "url": "https://www.company.com",
+    "applicationOwnerRoleId": "role-ao-website",
+    "knowledgeDomainIds": ["kd-client-mgmt"],
+    "strategicClassification": "invest"
+  },
+  {
+    "id": "app-customer-portal",
+    "name": "Customer Portal",
+    "description": "Self-service portal for customer order management, tracking, and support",
+    "category": "Operations",
+    "url": "https://portal.company.com",
+    "applicationOwnerRoleId": "role-ao-customer-portal",
+    "knowledgeDomainIds": ["kd-client-mgmt", "kd-order-mgmt", "kd-support"],
+    "strategicClassification": "invest"
+  }
+]

@@ -1,0 +1,681 @@
+[
+  {
+    "id": "act-101",
+    "name": "Browse equipment catalog",
+    "description": "Customer explores website to discover available equipment for rental",
+    "lane": "customer",
+    "valueChainStageId": "vcs-01",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-marketing" },
+      "accountable": { "type": "role", "id": "role-marketing-manager" },
+      "consulted": [],
+      "informed": [{ "type": "team", "id": "team-it" }]
+    },
+    "applicationIds": ["app-website", "app-customer-portal"],
+    "entityInteractions": [
+      { "entityId": "be-product", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-102",
+    "name": "Run marketing campaigns",
+    "description": "Marketing team executes campaigns for lead generation across digital channels",
+    "lane": "frontstage",
+    "valueChainStageId": "vcs-01",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-marketing-manager" },
+      "accountable": { "type": "role", "id": "role-marketing-manager" },
+      "consulted": [{ "type": "role", "id": "role-content-creator" }],
+      "informed": [{ "type": "team", "id": "team-sales" }]
+    },
+    "applicationIds": ["app-crm", "app-website"],
+    "entityInteractions": [
+      { "entityId": "be-lead", "operation": "create" }
+    ]
+  },
+  {
+    "id": "act-103",
+    "name": "Track campaign analytics",
+    "description": "Analyze marketing campaign performance metrics and lead quality",
+    "lane": "backstage",
+    "valueChainStageId": "vcs-01",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-marketing-manager" },
+      "accountable": { "type": "role", "id": "role-marketing-manager" },
+      "consulted": [{ "type": "team", "id": "team-sales" }],
+      "informed": [{ "type": "role", "id": "role-cfo" }]
+    },
+    "applicationIds": ["app-analytics", "app-crm"],
+    "entityInteractions": [
+      { "entityId": "be-lead", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-104",
+    "name": "Maintain website & catalog",
+    "description": "Keep CMS updated with current products, pricing, and availability information",
+    "lane": "support",
+    "valueChainStageId": "vcs-01",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-it" },
+      "accountable": { "type": "role", "id": "role-it-manager" },
+      "consulted": [{ "type": "role", "id": "role-marketing-manager" }],
+      "informed": [{ "type": "team", "id": "team-marketing" }]
+    },
+    "applicationIds": ["app-website", "app-rental-system"],
+    "entityInteractions": [
+      { "entityId": "be-product", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-201",
+    "name": "Submit equipment inquiry",
+    "description": "Customer requests a quote for equipment rental",
+    "lane": "customer",
+    "valueChainStageId": "vcs-02",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-sales" },
+      "accountable": { "type": "role", "id": "role-sales-director" },
+      "consulted": [],
+      "informed": [{ "type": "team", "id": "team-operations" }]
+    },
+    "applicationIds": ["app-website", "app-customer-portal"],
+    "entityInteractions": [
+      { "entityId": "be-lead", "operation": "create" }
+    ]
+  },
+  {
+    "id": "act-202",
+    "name": "Conduct needs assessment",
+    "description": "Sales team understands customer fleet requirements and use cases",
+    "lane": "frontstage",
+    "valueChainStageId": "vcs-02",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-sales-director" },
+      "accountable": { "type": "role", "id": "role-sales-director" },
+      "consulted": [{ "type": "role", "id": "role-account-manager" }],
+      "informed": [{ "type": "team", "id": "team-operations" }]
+    },
+    "applicationIds": ["app-crm", "app-teams"],
+    "entityInteractions": [
+      { "entityId": "be-lead", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-203",
+    "name": "Check equipment availability",
+    "description": "Verify current stock and device availability for requested equipment types",
+    "lane": "backstage",
+    "valueChainStageId": "vcs-02",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-inventory-manager" },
+      "accountable": { "type": "role", "id": "role-ops-manager" },
+      "consulted": [{ "type": "role", "id": "role-equipment-technician" }],
+      "informed": [{ "type": "role", "id": "role-sales-director" }]
+    },
+    "applicationIds": ["app-inventory", "app-rental-system"],
+    "entityInteractions": [
+      { "entityId": "be-product", "operation": "read" },
+      { "entityId": "be-device", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-204",
+    "name": "Create & send quote",
+    "description": "Prepare rental pricing proposal and send to customer for consideration",
+    "lane": "backstage",
+    "valueChainStageId": "vcs-02",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-account-manager" },
+      "accountable": { "type": "role", "id": "role-sales-director" },
+      "consulted": [{ "type": "role", "id": "role-finance-manager" }],
+      "informed": [{ "type": "team", "id": "team-operations" }]
+    },
+    "applicationIds": ["app-crm", "app-rental-system"],
+    "entityInteractions": [
+      { "entityId": "be-lead", "operation": "update" },
+      { "entityId": "be-product", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-205",
+    "name": "Validate lead data in CRM",
+    "description": "Ensure lead information quality and completeness in CRM system",
+    "lane": "support",
+    "valueChainStageId": "vcs-02",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-it" },
+      "accountable": { "type": "role", "id": "role-it-manager" },
+      "consulted": [{ "type": "role", "id": "role-sales-director" }],
+      "informed": []
+    },
+    "applicationIds": ["app-crm"],
+    "entityInteractions": [
+      { "entityId": "be-lead", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-301",
+    "name": "Place rental order",
+    "description": "Customer confirms and submits rental order through portal",
+    "lane": "customer",
+    "valueChainStageId": "vcs-03",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-sales" },
+      "accountable": { "type": "role", "id": "role-sales-director" },
+      "consulted": [],
+      "informed": [{ "type": "team", "id": "team-operations" }]
+    },
+    "applicationIds": ["app-customer-portal", "app-rental-system"],
+    "entityInteractions": [
+      { "entityId": "be-rental-order", "operation": "create" },
+      { "entityId": "be-customer", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-302",
+    "name": "Confirm order & delivery",
+    "description": "Confirm order details and delivery logistics with customer",
+    "lane": "frontstage",
+    "valueChainStageId": "vcs-03",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-inside-sales" },
+      "accountable": { "type": "role", "id": "role-sales-director" },
+      "consulted": [{ "type": "role", "id": "role-logistics-lead" }],
+      "informed": [{ "type": "team", "id": "team-operations" }]
+    },
+    "applicationIds": ["app-rental-system", "app-outlook"],
+    "entityInteractions": [
+      { "entityId": "be-rental-order", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-303",
+    "name": "Reserve equipment",
+    "description": "Allocate and reserve specific devices to the rental order",
+    "lane": "backstage",
+    "valueChainStageId": "vcs-03",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-inventory-manager" },
+      "accountable": { "type": "role", "id": "role-ops-manager" },
+      "consulted": [{ "type": "role", "id": "role-equipment-technician" }],
+      "informed": [{ "type": "role", "id": "role-sales-director" }]
+    },
+    "applicationIds": ["app-inventory", "app-rental-system"],
+    "entityInteractions": [
+      { "entityId": "be-device", "operation": "update" },
+      { "entityId": "be-rental-order", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-304",
+    "name": "Convert lead to customer",
+    "description": "Create customer record in system if new customer, archive lead record",
+    "lane": "backstage",
+    "valueChainStageId": "vcs-03",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-inside-sales" },
+      "accountable": { "type": "role", "id": "role-sales-director" },
+      "consulted": [{ "type": "team", "id": "team-finance" }],
+      "informed": [{ "type": "team", "id": "team-support" }]
+    },
+    "applicationIds": ["app-crm", "app-rental-system"],
+    "entityInteractions": [
+      { "entityId": "be-customer", "operation": "create" },
+      { "entityId": "be-lead", "operation": "archive" }
+    ]
+  },
+  {
+    "id": "act-305",
+    "name": "Generate order documentation",
+    "description": "Create order confirmation, packing lists, and shipping documentation",
+    "lane": "support",
+    "valueChainStageId": "vcs-03",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-operations" },
+      "accountable": { "type": "role", "id": "role-ops-manager" },
+      "consulted": [{ "type": "role", "id": "role-logistics-lead" }],
+      "informed": []
+    },
+    "applicationIds": ["app-rental-system", "app-sharepoint"],
+    "entityInteractions": [
+      { "entityId": "be-rental-order", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-401",
+    "name": "Review rental agreement",
+    "description": "Customer reviews and understands rental contract terms and conditions",
+    "lane": "customer",
+    "valueChainStageId": "vcs-04",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-management" },
+      "accountable": { "type": "role", "id": "role-coo" },
+      "consulted": [],
+      "informed": [{ "type": "team", "id": "team-sales" }]
+    },
+    "applicationIds": ["app-customer-portal", "app-outlook"],
+    "entityInteractions": [
+      { "entityId": "be-rental-contract", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-402",
+    "name": "Draft rental contract",
+    "description": "Prepare legal rental agreement with terms, conditions, and SLA specifications",
+    "lane": "frontstage",
+    "valueChainStageId": "vcs-04",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-coo" },
+      "accountable": { "type": "role", "id": "role-coo" },
+      "consulted": [{ "type": "role", "id": "role-sales-director" }],
+      "informed": [{ "type": "team", "id": "team-finance" }]
+    },
+    "applicationIds": ["app-rental-system", "app-sharepoint"],
+    "entityInteractions": [
+      { "entityId": "be-rental-contract", "operation": "create" },
+      { "entityId": "be-rental-order", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-403",
+    "name": "Negotiate terms & SLA",
+    "description": "Finalize rental pricing, service levels, and special conditions with customer",
+    "lane": "frontstage",
+    "valueChainStageId": "vcs-04",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-account-manager" },
+      "accountable": { "type": "role", "id": "role-sales-director" },
+      "consulted": [{ "type": "role", "id": "role-coo" }, { "type": "role", "id": "role-finance-manager" }],
+      "informed": [{ "type": "team", "id": "team-support" }]
+    },
+    "applicationIds": ["app-crm", "app-teams"],
+    "entityInteractions": [
+      { "entityId": "be-rental-contract", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-404",
+    "name": "Perform credit check",
+    "description": "Assess customer creditworthiness and payment risk",
+    "lane": "backstage",
+    "valueChainStageId": "vcs-04",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-finance-manager" },
+      "accountable": { "type": "role", "id": "role-finance-manager" },
+      "consulted": [],
+      "informed": [{ "type": "role", "id": "role-sales-director" }]
+    },
+    "applicationIds": ["app-finance-system", "app-crm"],
+    "entityInteractions": [
+      { "entityId": "be-customer", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-405",
+    "name": "Archive signed contract",
+    "description": "Store executed contract in document management system for compliance",
+    "lane": "support",
+    "valueChainStageId": "vcs-04",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-it" },
+      "accountable": { "type": "role", "id": "role-it-manager" },
+      "consulted": [],
+      "informed": [{ "type": "team", "id": "team-finance" }]
+    },
+    "applicationIds": ["app-sharepoint", "app-rental-system"],
+    "entityInteractions": [
+      { "entityId": "be-rental-contract", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-501",
+    "name": "Receive delivery",
+    "description": "Customer receives and accepts delivered equipment",
+    "lane": "customer",
+    "valueChainStageId": "vcs-05",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-operations" },
+      "accountable": { "type": "role", "id": "role-ops-manager" },
+      "consulted": [],
+      "informed": [{ "type": "team", "id": "team-support" }]
+    },
+    "applicationIds": ["app-customer-portal"],
+    "entityInteractions": [
+      { "entityId": "be-delivery-order", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-502",
+    "name": "Schedule delivery",
+    "description": "Coordinate delivery date, time, and logistics with customer",
+    "lane": "frontstage",
+    "valueChainStageId": "vcs-05",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-logistics-lead" },
+      "accountable": { "type": "role", "id": "role-logistics-lead" },
+      "consulted": [{ "type": "role", "id": "role-ops-manager" }],
+      "informed": [{ "type": "role", "id": "role-sales-director" }]
+    },
+    "applicationIds": ["app-delivery", "app-rental-system"],
+    "entityInteractions": [
+      { "entityId": "be-delivery-order", "operation": "create" }
+    ]
+  },
+  {
+    "id": "act-503",
+    "name": "Prepare & configure equipment",
+    "description": "Setup, configure, and test devices before shipment to customer",
+    "lane": "backstage",
+    "valueChainStageId": "vcs-05",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-equipment-technician" },
+      "accountable": { "type": "role", "id": "role-ops-manager" },
+      "consulted": [{ "type": "role", "id": "role-inventory-manager" }],
+      "informed": [{ "type": "role", "id": "role-logistics-lead" }]
+    },
+    "applicationIds": ["app-inventory", "app-asset-tracking"],
+    "entityInteractions": [
+      { "entityId": "be-device", "operation": "update" },
+      { "entityId": "be-maintenance-record", "operation": "create" }
+    ]
+  },
+  {
+    "id": "act-504",
+    "name": "Ship equipment",
+    "description": "Hand off equipment to carrier for delivery to customer",
+    "lane": "backstage",
+    "valueChainStageId": "vcs-05",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-logistics-specialist" },
+      "accountable": { "type": "role", "id": "role-logistics-lead" },
+      "consulted": [{ "type": "role", "id": "role-ops-manager" }],
+      "informed": [{ "type": "role", "id": "role-sales-director" }]
+    },
+    "applicationIds": ["app-delivery", "app-asset-tracking"],
+    "entityInteractions": [
+      { "entityId": "be-delivery-order", "operation": "update" },
+      { "entityId": "be-device", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-505",
+    "name": "Update asset tracking",
+    "description": "Record device location changes and transit updates in asset management system",
+    "lane": "support",
+    "valueChainStageId": "vcs-05",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-it" },
+      "accountable": { "type": "role", "id": "role-it-manager" },
+      "consulted": [{ "type": "role", "id": "role-logistics-lead" }],
+      "informed": []
+    },
+    "applicationIds": ["app-asset-tracking", "app-rental-system"],
+    "entityInteractions": [
+      { "entityId": "be-device", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-601",
+    "name": "Receive & review invoice",
+    "description": "Customer receives monthly invoice and reviews charges",
+    "lane": "customer",
+    "valueChainStageId": "vcs-06",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-finance" },
+      "accountable": { "type": "role", "id": "role-finance-manager" },
+      "consulted": [],
+      "informed": []
+    },
+    "applicationIds": ["app-customer-portal", "app-outlook"],
+    "entityInteractions": [
+      { "entityId": "be-invoice", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-602",
+    "name": "Generate monthly invoices",
+    "description": "Create and send invoices based on active rental contracts",
+    "lane": "frontstage",
+    "valueChainStageId": "vcs-06",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-billing-specialist" },
+      "accountable": { "type": "role", "id": "role-finance-manager" },
+      "consulted": [{ "type": "role", "id": "role-accountant" }],
+      "informed": [{ "type": "team", "id": "team-sales" }]
+    },
+    "applicationIds": ["app-billing", "app-rental-system"],
+    "entityInteractions": [
+      { "entityId": "be-invoice", "operation": "create" },
+      { "entityId": "be-rental-contract", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-603",
+    "name": "Process payments",
+    "description": "Record and reconcile customer payments against invoices",
+    "lane": "backstage",
+    "valueChainStageId": "vcs-06",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-billing-specialist" },
+      "accountable": { "type": "role", "id": "role-finance-manager" },
+      "consulted": [],
+      "informed": [{ "type": "role", "id": "role-accountant" }]
+    },
+    "applicationIds": ["app-billing", "app-finance-system"],
+    "entityInteractions": [
+      { "entityId": "be-invoice", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-604",
+    "name": "Handle overdue accounts",
+    "description": "Manage collections and follow up on past-due invoices",
+    "lane": "backstage",
+    "valueChainStageId": "vcs-06",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-billing-specialist" },
+      "accountable": { "type": "role", "id": "role-finance-manager" },
+      "consulted": [{ "type": "role", "id": "role-account-manager" }],
+      "informed": [{ "type": "role", "id": "role-sales-director" }]
+    },
+    "applicationIds": ["app-billing", "app-crm"],
+    "entityInteractions": [
+      { "entityId": "be-invoice", "operation": "update" },
+      { "entityId": "be-customer", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-605",
+    "name": "Sync billing with accounting",
+    "description": "Reconcile billing and accounting systems to ensure data consistency",
+    "lane": "support",
+    "valueChainStageId": "vcs-06",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-it" },
+      "accountable": { "type": "role", "id": "role-it-manager" },
+      "consulted": [{ "type": "role", "id": "role-accountant" }],
+      "informed": []
+    },
+    "applicationIds": ["app-billing", "app-finance-system"],
+    "entityInteractions": [
+      { "entityId": "be-invoice", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-701",
+    "name": "Report issue",
+    "description": "Customer creates support ticket to report equipment problem or question",
+    "lane": "customer",
+    "valueChainStageId": "vcs-07",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-support" },
+      "accountable": { "type": "role", "id": "role-support-manager" },
+      "consulted": [],
+      "informed": []
+    },
+    "applicationIds": ["app-customer-portal", "app-teams"],
+    "entityInteractions": [
+      { "entityId": "be-support-ticket", "operation": "create" }
+    ]
+  },
+  {
+    "id": "act-702",
+    "name": "Diagnose & resolve",
+    "description": "Support team troubleshoots issue and resolves or escalates problem",
+    "lane": "frontstage",
+    "valueChainStageId": "vcs-07",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-support-specialist" },
+      "accountable": { "type": "role", "id": "role-support-manager" },
+      "consulted": [{ "type": "role", "id": "role-equipment-technician" }],
+      "informed": [{ "type": "role", "id": "role-field-technician" }]
+    },
+    "applicationIds": ["app-confluence", "app-teams"],
+    "entityInteractions": [
+      { "entityId": "be-support-ticket", "operation": "update" },
+      { "entityId": "be-device", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-703",
+    "name": "Schedule maintenance",
+    "description": "Plan device repair, replacement, or preventive maintenance",
+    "lane": "backstage",
+    "valueChainStageId": "vcs-07",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-ops-manager" },
+      "accountable": { "type": "role", "id": "role-ops-manager" },
+      "consulted": [{ "type": "role", "id": "role-equipment-technician" }],
+      "informed": [{ "type": "role", "id": "role-support-manager" }]
+    },
+    "applicationIds": ["app-rental-system", "app-inventory"],
+    "entityInteractions": [
+      { "entityId": "be-maintenance-record", "operation": "create" },
+      { "entityId": "be-device", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-704",
+    "name": "Process equipment swap",
+    "description": "Arrange replacement of faulty device with working unit",
+    "lane": "backstage",
+    "valueChainStageId": "vcs-07",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-logistics-specialist" },
+      "accountable": { "type": "role", "id": "role-ops-manager" },
+      "consulted": [{ "type": "role", "id": "role-equipment-technician" }],
+      "informed": [{ "type": "role", "id": "role-support-manager" }]
+    },
+    "applicationIds": ["app-asset-tracking", "app-delivery"],
+    "entityInteractions": [
+      { "entityId": "be-device", "operation": "update" },
+      { "entityId": "be-delivery-order", "operation": "create" }
+    ]
+  },
+  {
+    "id": "act-705",
+    "name": "Update knowledge base",
+    "description": "Document solutions and best practices in support knowledge base",
+    "lane": "support",
+    "valueChainStageId": "vcs-07",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-support-specialist" },
+      "accountable": { "type": "role", "id": "role-support-manager" },
+      "consulted": [{ "type": "role", "id": "role-support-specialist" }],
+      "informed": []
+    },
+    "applicationIds": ["app-confluence"],
+    "entityInteractions": [
+      { "entityId": "be-knowledge-article", "operation": "create" }
+    ]
+  },
+  {
+    "id": "act-801",
+    "name": "Provide feedback",
+    "description": "Customer completes satisfaction survey and provides feedback",
+    "lane": "customer",
+    "valueChainStageId": "vcs-08",
+    "raci": {
+      "responsible": { "type": "team", "id": "team-sales" },
+      "accountable": { "type": "role", "id": "role-sales-director" },
+      "consulted": [],
+      "informed": [{ "type": "team", "id": "team-management" }]
+    },
+    "applicationIds": ["app-customer-portal", "app-crm"],
+    "entityInteractions": [
+      { "entityId": "be-customer", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-802",
+    "name": "Conduct account review",
+    "description": "Periodic relationship review with customer to assess satisfaction and needs",
+    "lane": "frontstage",
+    "valueChainStageId": "vcs-08",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-account-manager" },
+      "accountable": { "type": "role", "id": "role-sales-director" },
+      "consulted": [{ "type": "role", "id": "role-support-manager" }],
+      "informed": [{ "type": "role", "id": "role-cfo" }]
+    },
+    "applicationIds": ["app-crm", "app-teams"],
+    "entityInteractions": [
+      { "entityId": "be-customer", "operation": "read" },
+      { "entityId": "be-rental-contract", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-803",
+    "name": "Propose contract renewal",
+    "description": "Present renewal terms and upsell opportunities to customer",
+    "lane": "frontstage",
+    "valueChainStageId": "vcs-08",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-account-manager" },
+      "accountable": { "type": "role", "id": "role-sales-director" },
+      "consulted": [{ "type": "role", "id": "role-finance-manager" }],
+      "informed": [{ "type": "team", "id": "team-operations" }]
+    },
+    "applicationIds": ["app-crm", "app-rental-system"],
+    "entityInteractions": [
+      { "entityId": "be-rental-contract", "operation": "update" }
+    ]
+  },
+  {
+    "id": "act-804",
+    "name": "Analyze customer lifetime value",
+    "description": "Evaluate customer metrics, revenue, and strategic account value",
+    "lane": "backstage",
+    "valueChainStageId": "vcs-08",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-cfo" },
+      "accountable": { "type": "role", "id": "role-cfo" },
+      "consulted": [{ "type": "role", "id": "role-sales-director" }],
+      "informed": [{ "type": "role", "id": "role-ceo" }]
+    },
+    "applicationIds": ["app-analytics", "app-crm"],
+    "entityInteractions": [
+      { "entityId": "be-customer", "operation": "read" },
+      { "entityId": "be-invoice", "operation": "read" }
+    ]
+  },
+  {
+    "id": "act-805",
+    "name": "Audit equipment condition",
+    "description": "Assess condition of returning or aging devices in rental fleet",
+    "lane": "support",
+    "valueChainStageId": "vcs-08",
+    "raci": {
+      "responsible": { "type": "role", "id": "role-equipment-technician" },
+      "accountable": { "type": "role", "id": "role-ops-manager" },
+      "consulted": [{ "type": "role", "id": "role-inventory-manager" }],
+      "informed": [{ "type": "role", "id": "role-logistics-lead" }]
+    },
+    "applicationIds": ["app-asset-tracking", "app-inventory"],
+    "entityInteractions": [
+      { "entityId": "be-device", "operation": "update" },
+      { "entityId": "be-maintenance-record", "operation": "create" }
+    ]
+  }
+]

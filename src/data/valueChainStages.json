@@ -1,0 +1,10 @@
+[
+  {"id": "vcs-01", "name": "Attract", "description": "Marketing and outreach to generate awareness and attract potential B2B customers for IT equipment rental.", "order": 1},
+  {"id": "vcs-02", "name": "Qualify", "description": "Assess incoming leads, understand fleet requirements, and determine fit for rental services.", "order": 2},
+  {"id": "vcs-03", "name": "Order", "description": "Customer places equipment rental order specifying devices, quantities, and delivery requirements.", "order": 3},
+  {"id": "vcs-04", "name": "Contract", "description": "Formalize rental agreement including terms, pricing, SLAs, and payment schedule.", "order": 4},
+  {"id": "vcs-05", "name": "Fulfill", "description": "Select, prepare, configure, and deliver rented equipment to customer site.", "order": 5},
+  {"id": "vcs-06", "name": "Bill", "description": "Generate invoices, process payments, and manage billing cycle for active rentals.", "order": 6},
+  {"id": "vcs-07", "name": "Support", "description": "Technical support, maintenance requests, and equipment replacements during rental period.", "order": 7},
+  {"id": "vcs-08", "name": "Engage & Renew", "description": "Nurture relationships, gather feedback, upsell equipment, and manage contract renewals.", "order": 8}
+]
