@@ -1,9 +1,12 @@
 import { getRiskColor, getRiskLabel } from '../utils/riskCalculation';
 import { resolveRaciRef, getTimekInfo, getMaturityInfo, getFrequencyLabel, getOperationLabel } from '../utils/dataHelpers';
+import ActionForm from './ActionForm';
 
 export default function DetailPanel({
   selectedItem,
   onClose,
+  onSaveAction,
+  onDeleteAction,
   data
 }) {
   if (!selectedItem) {
@@ -28,129 +31,6 @@ export default function DetailPanel({
     personIndex,
     risks
   } = data;
-
-  const renderActionDetail = () => {
-    const action = actions.find(a => a.id === selectedItem.id);
-    if (!action) return null;
-
-    const stage = stages?.find(s => s.id === action.valueChainStageId);
-    const relatedApps = (action.applicationIds || [])
-      .map(appId => appIndex[appId])
-      .filter(Boolean);
-
-    const raci = action.raci || {};
-    const accountable = resolveRaciRef(raci.accountable, roleIndex, teamIndex);
-    const responsible = resolveRaciRef(raci.responsible, roleIndex, teamIndex);
-    const consulted = (raci.consulted || []).map(ref => resolveRaciRef(ref, roleIndex, teamIndex));
-    const informed = (raci.informed || []).map(ref => resolveRaciRef(ref, roleIndex, teamIndex));
-
-    const riskLevel = risks.actionRisks?.[action.id] || 'none';
-
-    return (
-      <div className="detail-content">
-        <h2 className="detail-header">{action.name}</h2>
-
-        {action.description && (
-          <p className="detail-description">{action.description}</p>
-        )}
-
-        <div className="detail-section">
-          <div className="detail-badges">
-            {stage && (
-              <span className="stage-badge">
-                Stage: {stage.name}
-              </span>
-            )}
-            {action.lane && (
-              <span className="lane-badge">
-                Lane: {action.lane}
-              </span>
-            )}
-          </div>
-        </div>
-
-        <div className="detail-section">
-          <h3 className="section-title">RACI</h3>
-          {accountable !== '—' && (
-            <div className="detail-row">
-              <span className="detail-label">Accountable:</span>
-              <span className="detail-value">{accountable}</span>
-            </div>
-          )}
-          {responsible !== '—' && (
-            <div className="detail-row">
-              <span className="detail-label">Responsible:</span>
-              <span className="detail-value">{responsible}</span>
-            </div>
-          )}
-          {consulted.length > 0 && (
-            <div className="detail-row">
-              <span className="detail-label">Consulted:</span>
-              <span className="detail-value">{consulted.join(', ')}</span>
-            </div>
-          )}
-          {informed.length > 0 && (
-            <div className="detail-row">
-              <span className="detail-label">Informed:</span>
-              <span className="detail-value">{informed.join(', ')}</span>
-            </div>
-          )}
-        </div>
-
-        {relatedApps.length > 0 && (
-          <div className="detail-section">
-            <h3 className="section-title">Applications</h3>
-            <div className="detail-list">
-              {relatedApps.map(app => (
-                <div key={app.id} className="list-item">
-                  {app.name}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {action.entityInteractions && action.entityInteractions.length > 0 && (
-          <div className="detail-section">
-            <h3 className="section-title">Entity Interactions</h3>
-            <table className="interaction-table">
-              <thead>
-                <tr>
-                  <th>Entity</th>
-                  <th>Operation</th>
-                </tr>
-              </thead>
-              <tbody>
-                {action.entityInteractions.map((interaction, idx) => {
-                  const entity = entityIndex[interaction.entityId];
-                  return (
-                    <tr key={idx}>
-                      <td>{entity?.name || interaction.entityId}</td>
-                      <td><span className={`op-badge op-${interaction.operation}`}>{getOperationLabel(interaction.operation)}</span></td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        )}
-
-        {riskLevel !== 'none' && (
-          <div className="detail-section">
-            <h3 className="section-title">Risk</h3>
-            <div className="detail-row">
-              <span
-                className="risk-level"
-                style={{ color: getRiskColor(riskLevel) }}
-              >
-                {getRiskLabel(riskLevel)}
-              </span>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  };
 
   const renderApplicationDetail = () => {
     const app = appIndex[selectedItem.id];
@@ -501,7 +381,18 @@ export default function DetailPanel({
   const renderContent = () => {
     switch (selectedItem.type) {
       case 'action':
-        return renderActionDetail();
+        return (
+          <ActionForm
+            selectedItem={selectedItem}
+            actions={actions}
+            stages={stages}
+            applications={applications}
+            teams={teams}
+            entities={entities}
+            onSave={onSaveAction}
+            onDelete={onDeleteAction}
+          />
+        );
       case 'application':
         return renderApplicationDetail();
       case 'domain':

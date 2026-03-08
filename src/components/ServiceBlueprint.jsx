@@ -25,8 +25,18 @@ export default function ServiceBlueprint({ stages, actions, applications, roleIn
   return (
     <div className="page">
       <div className="page-header">
-        <h1 className="page-title">Service Design Blueprint</h1>
-        <p className="page-subtitle">Customer value chain with swim lanes showing actions, responsibilities, and risk indicators</p>
+        <div className="page-header-row">
+          <div>
+            <h1 className="page-title">Service Design Blueprint</h1>
+            <p className="page-subtitle">Customer value chain with swim lanes showing actions, responsibilities, and risk indicators</p>
+          </div>
+          <button
+            className="btn-add-action"
+            onClick={() => onSelect({ type: 'action', id: null, isNew: true, defaults: {} })}
+          >
+            + Add Action
+          </button>
+        </div>
       </div>
 
       <div className="blueprint-container">
@@ -85,9 +95,18 @@ export default function ServiceBlueprint({ stages, actions, applications, roleIn
                           onSelect={onSelect}
                         />
                       ))}
-                      {cellActions.length === 0 && (
-                        <div style={{ opacity: 0.3, fontSize: 11, color: '#94a3b8' }}>—</div>
-                      )}
+                      <button
+                        className="btn-cell-add"
+                        onClick={() => onSelect({
+                          type: 'action',
+                          id: null,
+                          isNew: true,
+                          defaults: { valueChainStageId: stage.id, lane: lane.id }
+                        })}
+                        title="Add action here"
+                      >
+                        +
+                      </button>
                     </div>
                   )
                 })}

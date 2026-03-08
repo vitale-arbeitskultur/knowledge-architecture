@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import Navigation from './components/Navigation'
 import ServiceBlueprint from './components/ServiceBlueprint'
 import ApplicationLandscape from './components/ApplicationLandscape'
@@ -8,9 +8,10 @@ import HelpGuide from './components/HelpGuide'
 import DetailPanel from './components/DetailPanel'
 import { calculateAllRisks } from './utils/riskCalculation'
 import { buildIndex, buildRoleIndex } from './utils/dataHelpers'
+import { loadData, saveData } from './utils/persistence'
 
 import stages from './data/valueChainStages.json'
-import actions from './data/actions.json'
+import staticActions from './data/actions.json'
 import teams from './data/teams.json'
 import roles from './data/roles.json'
 import persons from './data/persons.json'
@@ -22,11 +23,12 @@ import integrations from './data/integrations.json'
 export default function App() {
   const [currentView, setCurrentView] = useState('blueprint')
   const [selectedItem, setSelectedItem] = useState(null)
+  const [actions, setActions] = useState(() => loadData('actions', staticActions))
 
-  // Calculate risks and build indexes on mount
+  // Calculate risks and build indexes
   const risks = useMemo(() => {
     return calculateAllRisks(integrations, applications, actions, stages)
-  }, [])
+  }, [actions])
 
   const roleIndex = useMemo(() => {
     return buildRoleIndex(teams, roles)
@@ -37,6 +39,28 @@ export default function App() {
   const entityIndex = useMemo(() => buildIndex(entities), [])
   const domainIndex = useMemo(() => buildIndex(domains), [])
   const personIndex = useMemo(() => buildIndex(persons), [])
+
+  // CRUD handlers for actions
+  const handleSaveAction = useCallback((action) => {
+    setActions(prev => {
+      const idx = prev.findIndex(a => a.id === action.id)
+      const next = idx >= 0
+        ? prev.map(a => a.id === action.id ? action : a)
+        : [...prev, action]
+      saveData('actions', next)
+      return next
+    })
+    setSelectedItem(null)
+  }, [])
+
+  const handleDeleteAction = useCallback((actionId) => {
+    setActions(prev => {
+      const next = prev.filter(a => a.id !== actionId)
+      saveData('actions', next)
+      return next
+    })
+    setSelectedItem(null)
+  }, [])
 
   // Handle hash-based routing
   useEffect(() => {
@@ -120,6 +144,8 @@ export default function App() {
           <DetailPanel
             selectedItem={selectedItem}
             onClose={() => setSelectedItem(null)}
+            onSaveAction={handleSaveAction}
+            onDeleteAction={handleDeleteAction}
             data={{
               stages, actions, teams, roles, persons,
               applications, domains, entities, integrations,
